@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이벤트 트리거를 이용한 로그인 </title>
+<style>
+  a{
+  		text-decoration:none;
+  }
+  a:visited{
+        text-decoration:none;
+        color:orange;
+  }
+  a:active{
+  		text-decoration:none;
+        background-color:papayawhip;
+  }
+</style>
+</head>
+<body>
+
+		<form action='login.do'  method='post'  id="loginform">
+				<input type="text"  id="id" name=id" 
+				placeholder="아이디를 입력하세요" /><br/>
+				<input type="password"  id="pw" name="pw"		
+				placeholder="비밀번호를 입력하세요" /><br/>
+				<input type="submit"  value="로그인" />
+				<a href='#'><img src="./images/naeun.jpg"
+				id='loginimg' width='100'  height= '100' /></a>
+				<a href='#'><span id="logintext">로그인</span></a>
+		</form>
+		
+		<h1 id="outer">제목<p  id="inner">자식 태그</p>태그</h1>
+
+</body>
+
+<script>
+		document.getElementById('outer')
+		    .addEventListener('click', function(e){
+			alert('부모 태그의 클릭 이벤트');
+		});
+
+		document.getElementById('inner')
+		    .addEventListener('click', function(e){
+			alert('자식 태그의 클릭 이벤트');
+			// 이코드가 없으면 위의 내용을 처리하고 부모에게 이벤트를 전파합니다. 
+			//이벤트 객체 찾아오기 
+			var event = e || window.event;
+			//IE하위브라우저를 위한 설정 
+			e.cancelBubble = true; 
+			//그 이외 브라우저 설정 
+			//event.stopPropagation 속성이 존재한다면 
+			if(e.stopPropagation){
+				e.stopPropagation();
+			}
+		});
+			
+      //이미지를 클릭하면 폼에 submit이벤트를 강제로 발생시킴 -이벤트 트리거 
+        document.getElementById('loginimg')
+            .addEventListener('click',  function(e){
+        	document.getElementById('loginform').submit();
+        });
+      // 텍스트를 클릭하면 품에 submit이벤트를 강제로 발생시킴 
+        document.getElementById('logintext')
+        .addEventListener('click',  function(e){
+    	document.getElementById('loginform').submit();
+    });
+
+</script>
+</html>

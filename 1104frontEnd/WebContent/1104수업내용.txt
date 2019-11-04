@@ -1,0 +1,275 @@
+
+
+**BOM(Browser Object Model)
+=>브라우저가 제공하는 객체 중에서 브라우저를 제어하기 위한 객체
+1.navigator 
+=>웹브라우저의 종류 및 버전, 시스템 등의 웹 브라우저 고유 정보를 제공하는 객체 
+1)속성 
+appCodeName:웹 브라우저의 코드명 
+appName:웹 브라우저의 이름 
+appVersion:웹 브라우저의 이름과 버전
+platform:플랫폼 
+!! 중요 userAgent:클라이언트의 브라우저와 운영체제 정보 리턴 
+이 속성을 가지고 접속한 운영체제를 파악해서 필요한 경우 다른 웹 사이트나 페이지로 이동 
+시킵니다.   
+
+2)메소드 
+javaEnable():자바 사용 가능 여부를 리턴 
+외국에서는 Active X보다 java를 이용해서 플러드인 프로그램을 많이 만들었기 때문에 
+외국에서는 중요 
+
+3)모바일에서 접속했을 때 현재 메인 페이지를 제외한 페이지로 보내기 
+=>navigator의 userAgent속성을 이용 
+모바일 운영체제는 iphone, android등이 있습니다. 
+iOS는 스마트폰 운영체제인 iphone과 태블릿 운영체제인 ipad 그리고 ipod으로 구분을 합니다.
+안드로이드는 구분하지 않습니다. 
+iOS는 운영체제 만으로 구분해서 분기하지만 android는 유저가 선택할 수 있도록 합니다.
+ 
+ar = ['iphone', 'ipod', 'android']
+컬렉션을 가지고 어떤 데이터의 존재여부를 확인할 때 데이터를 찾으면 찾는 작업을 중단
+  
+ex)index.html파일에 스마트폰(iphone,android, ipod)에서 접속하면 www.naver.com으로 
+이동하도록 자바스크립트 코드를 작성 
+=>navigator.userAgent속성을 이용 
+<script>
+		//스마트폰에서 접속하면 www.naver.com으로 접속하도록 하기 
+		
+		//스마트폰 운영체제 배열을 생성 
+		var smartphones = ['iphone', 'ipod', 'android'];
+		//userAgent 값을 찾아오기 
+		var userAgent = navigator.userAgent.toLowerCase(); 
+		//데이터가 있는지 확인하기 위한 변수 
+		var flag = false; 
+		//smartphones 배열의 데이터를 가져와서 포함되어 있는지 확인 
+		for(idx in smartphones){
+			if(userAgent.indexOf(smartphones[idx]) >= 0){
+				flag = true;
+				break;
+			}
+		}
+		
+	    if(flag == true){
+	    	window.location = 'https://www.naver.com';
+	    }
+		
+		
+</script>
+
+2.history객체 
+=>웹 브라우저가 로딩했던 페이지의 내역을 저장하고 있는 객체 
+1) 속성 
+=>current : 현재 페이지의 URL 
+=>next : 다음 페이지의 URL 
+=> previous: 이전 페이지의 URL 
+
+2)메소드 
+=>back()
+=>forward()
+=>go(인덱스 또는 URL) 
+
+3)최근에는 UI 개선을 위해서 페이지 이동을 할 때 마다 이동한 경로를 서버의 로그로 기록합니다. 
+이를 분석해서 UI개선을 수행합니다. 
+
+회원가입링크를 클릭 - 회원정보입력페이지 - 회원가입 결과 페이지 
+
+** DOM(Document Object Model)
+=>브라우저에 표시되는 객체 
+=>DOM의 하위 요소들은 HTML파일의 태그와 매핑 
+1.document.body: body태그 
+
+2.document객체의 프로퍼티 
+=>bgcolor:배경색 
+=>fgcolor: 전경색(글자색) 
+
+=>cookie: 쿠키(클라이언트에 저장하고 서버가 사용하는 데이터)
+location: 현재문서의 URL(window.location, location.href 와 동일) 
+=>linkColor: 링크색상 
+
+=>referrer(리퍼러): 링크를 따라서 이동해 온 경우 이전 페이지 
+이 페이지에 어떻게 접속했는지를 알려주는 속성 
+마케팅에서는 굉장히 중요한 속성 
+어떻게 이 페이지에 접속했는지를 알 수 있기 때문에 마케팅을 할 때 또는 마케팅의 효율성을 
+판단할 때 사용 
+
+3.document객체의 메소드
+=>close(), open(), write(), writeln()
+=>appendChild(DOM객체): DOM객체가 하위에 추가 
+=>removeChild(DOM객체):DOM객체가 제고 
+=>createElement(tagName): DOM이 생성 
+=>createTextNode(text):DOM안의 텍스트 생성 
+=>이 메소드들을 이용하면 HTML문서안에 다른 DOM객체를 배치할 수 있습니다. 
+
+4.innerHTML 속성 
+=> 태그와 태그 사이에 포함되는 문자열을 설정하는 속성 
+=> 태그가 적용됨 
+=> 태그 안에 다른 태그를 포함시키거나 출력하거나 문자열을 출력하고자 할 때 사용 가능 
+=>속성에는 데이터가 대입되기 때문에 기존 내용을 유지하면서 추가할 때는 += 연산자를 
+이용해야 합니다. 
+
+5.문서 객체 선택 
+1)!!중요 getElementById(아이디): 아이데에 해당하는 객체 1개 리턴 
+ =>id는 태그 1개를 구분하기 위한 속성 
+
+2)getElementsByName(이름 - name): name에 해당하는 객체들의 배열 리턴  
+=>name은 서버에게 전송할 때 서버에서 읽어내기 위한 속성 
+=> 중복가능 (checkbox, radio등) 
+
+3)getElementsByTagName(tagname): tagname에 해당하는 객체들의 배열 리턴 
+ 
+4)getElementsByClassName(classname): classname에 해당하는 class속성을 가진 
+객체들의 배열 리턴 
+=>class속성은 동일한 디자인을 적용하기 위해서 그룹화 할 때 사용하는 속성  
+
+5)select를 이용한 option 선택 
+select객체.options[index]: index번째에 해당하는 Option 찾기 
+
+select객체.options[select객체.selectedIndex]: 현재 선택된 Option찾기  
+
+
+6.value속성 
+=>form내부에 배치되는 객체에만 존재하는 속성 
+input(type이 text, password, file, hidden)은 이 속성이 입력된 값 
+input(type이 checkbox, radio)은 선택한 버튼의 value입니다. 
+input(type이 submit, reset, button)은 선택한 버튼의 보여지는 레이블 
+textarea는 입력한 값 또는 태그와 태그 사이에 입력한 값입니다. 
+
+=>form안의 데이터 유효성 검사를 하기 위해서 form의 데이터에 입력된 값을 찾아오는 경우 
+이 속성을 이용 
+
+7.style속성 
+=>style.속성이름 = 값 의 형태를 호출하면 스타일 시트를 적용할 수 있습니다. 
+
+8.focus()
+=>input 객체의 경우 포커스를 설정해 줍니다. 
+
+
+** Event 처리 
+=>javascript에서의 이벤트 처리 
+1.인라인 이벤트 모델 
+=>태그 안에서 이벤트 처리 
+<태그 이벤트이름="이벤트 처리 코드"></태그> 
+=>처리 문장이 여러 줄인 경우는 작성하는 게 어렵고 코드의 재사용이 안됩니다. 
+=>권장하지 않는 방식 
+
+2.고전적 이벤트 처리모델 
+자바스크립트 안에 
+객체.이벤트이름 = function(event 객체){
+    이벤트가 발생했을 때 수행할 내용
+}
+
+=>이벤트 처리 코드를 삭제하고자 하는 경우에는 function 대신에 null을 대입 
+ 
+3.표준 이벤트 모델 
+=>W3C에서 공식 인정한 이벤트 모델 
+1)이벤트 처리코드 설정 
+객체.addEventListener('이벤트 이름', function(e) {
+    이벤트가 발생했을 때 수행할 내용; 
+}); 
+=>이벤트 이름을 작성할 때 on을 제외 
+
+2)이벤트 처리코드 제거 
+객체.removeEventListener('이벤트 이름', function(e) {
+    이벤트가 발생했을 때 수행할 내용; 
+}); 
+
+4.이벤트 핸들러(event Handler:이벤트 처리를 위한 메소드) 
+=>이벤트핸들러에는 이벤트가 발생한 객체의 참조를 저장하고 있는 this가 내장되어 있습니다. 
+=>this를 사용하지 않고 document.getElementById()를 찾아서 사용해도 됩니다.  
+
+5.event객체 
+=>이벤트가 발생할 때 이벤트 핸들어 함수에게 전달되는 객체 
+=>생성 
+var 변수명 = 함수의 매개변수 || window.event; 
+=>IE하위버전에서는 이벤트 객체가 window.event 라는 속성으로 제공되고 그 이외의 브라우저 
+에서는 이벤트처리함수의 매개변수로 이벤트가 객체로 전달되기 때문입니다. 
+=>브라우저 호환성을 유지하기 위해서 위와 같은 형태로 event 객체를 사용 
+=>screenX, screenY, layerX, layerY: 이벤트가 발생한 좌표에 관련된 속성으로 x나 y속성으로 
+도 저장됩니다. 
+=>which:누른 버튼이나 키보드의 ASCII Code값 
+=>modifier: 같이 누른 조합키의 값 
+=>모든 속성이 모든 이벤트에서 동일하게 사용되지는 않습니다. 
+
+6.event trigger 
+=>이벤트를 강제로 발생시키는 것 
+=>객체.on이벤트()또는 객체.이벤트(): 이벤트 종류에 따라서 1가지 방법을 선택 
+=>최근에는 form에 submit이나 button을 배치하지 않고 image를 배치한 후 image를 클릭하면 
+form의 데이터를 submit하는 방식이 많이 사용되는데 이 경우가 event trigger를 이용한 것 
+
+7.default Event 제거 
+=>몇몇 태그에는 기본적으로 제공되는 기능이 있습니다. 
+a태그는 href속성에 지정된 url로 이동 
+submit은 form의 데이터를 전송 
+reset은 form의 데이터를 클리어 
+button태그(input type='button'으로 만든 버튼은 기본 기능 없음)는 form의 데이터를 전송 
+=> 이 기능을 무시하고자 하는 경우에는 event객체가 preventDefault()를 호출하면 기본기능은 
+무시됩니다. 
+=>form의 submit이벤트가 발생한 경우 유효성 검사를 수행해서 유효성 검사를 통과하지 못하면 
+서버로 데이터를 전송하지 않도록 하는 용도로 많이 사용합니다. 
+
+8.Event Bubbling 
+=>부모객체와 자식객체 간에 동일한 이벤트를 처리하는 핸들러가 존재하는 경우 자식객체에서 
+이벤트가 발생했을 때 부모객체의 이벤트까지 처리하는 것 
+=>스마트폰에서는 Event Bubbling이 금지되어 있습니다. 
+=>HTML에서는 Event Bubbling이 발생 
+=>IE하위버전에서는 이벤트 객체의 cancelBubble 속성에 true를 대입해야하고  그 이외의 브라우저에서는 
+이벤트 객체가 stopPropagation()을 호출해야 합니다. 
+
+9.이벤트 종류 
+1)click이벤트 
+=>event객체의 layerX, layerY, pageX, pageY, screenX, screenY 프로퍼티에 이벤트가 발생한
+마우스의 좌표가 저장 
+=>which프로퍼티에는 왼쪽을 누른 경우는 1 오른쪽을 누른 경우는 3이 저장 
+=>modifires를 이용해서 조합키를 누른 것을 저장 
+
+2)dblclick 이벤트 
+=>마우스를 더블 클릭했을 때 발생하는 이벤트 
+
+3)keydown 이벤트 
+=>키보드를 누를 때 발생하는 이벤트 
+=>which프로퍼티로 누른 키 값을 저장하는데 이 프로퍼티가 없을 때는 keyCode 프로퍼티 
+
+4)keypress이벤트 
+=>키보드를 누르고 있을 때 발생하는 이벤트인데 프로퍼티는 keydown과 동일  
+
+5)keyup이벤트 
+=>키보드에서 키를 놓는 순간 발생하는 이벤트인데 프로퍼티는 ketdown과 동일 
+=>키보드 이벤트들은 기본적으로 누른 키값을 출력하는 기능을 소유하고 있습니다. 
+
+6)mousedown이벤트 
+
+7)mousemove이벤트 
+
+8)mouseout이벤트 : 영역에서 나갈때 
+
+9)mouseover이벤트 : 영역에 들어올 때 
+
+10)mouseup이벤트 
+
+=>mouseover를 hover라고 하는 경우가 많습니다. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
