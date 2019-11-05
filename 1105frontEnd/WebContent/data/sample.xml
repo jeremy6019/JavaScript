@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datas>
+       <data> 
+            <name> 김기범</name>
+            <score>90</score>
+       </data>
+       <data> 
+            <name> 이은영</name>
+            <score>80</score>
+       </data>
+       <data> 
+            <name> 김윤서</name>
+            <score>100</score>
+       </data>
+</datas>
